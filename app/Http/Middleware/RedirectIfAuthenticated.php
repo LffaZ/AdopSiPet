@@ -17,9 +17,16 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        // dd(Auth::user());
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            if ($guard == 'petcontributor' && Auth::guard($guard)->check()) {
+                return redirect(RouteServiceProvider::PET_CONTRIBUTOR_HOME);
+            }
+            // if (Auth::user()->is_admin === 1 && Auth::guard($guard)->check()) {
+            //     return redirect(RouteServiceProvider::ADMIN_HOME);
+            // }
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }

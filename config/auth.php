@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'petcontributor' => [
+            'driver' => 'session',
+            'provider' => 'petcontributors',
+        ],
     ],
 
     /*
@@ -64,7 +68,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'petcontributors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\PetContributor::class,
+        ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

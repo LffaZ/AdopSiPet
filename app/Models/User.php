@@ -17,11 +17,33 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name',
+        'nama',
         'email',
+        'jenkel',
+        'no_hp',
+        'tgl_lahir',
         'password',
     ];
+
+    public function useraddress()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+    public function adoption()
+    {
+        return $this->hasMany(Adoption::class);
+    }
+    public function favorit()
+    {
+        return $this->hasMany(Favorit::class);
+    }
+    public function searchhistory()
+    {
+        return $this->hasMany(SearchHistory::class);
+    }
+    // public function 
 
     /**
      * The attributes that should be hidden for serialization.
