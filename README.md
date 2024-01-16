@@ -26,10 +26,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 To clone a Laravel project from GitHub, you can follow these steps using Git. Make sure you have [Git](https://www.git-scm.com/downloads) installed on your system before starting. Here are the steps:
 
 1. Run `git clone https://github.com/LffaZ/AdopSiPet.git` on gitbash
-2. Open laravel project's folder and run `composer install`   `cp .env.example .env`
-3. Configure database or any on .env file
-4. Run `php artisan key:generate`   `php artisan migrate`   `php artisan serve`
-5. Go to link [localhost:8000](localhost:8000)
+2. Open laravel project's folder and run
+   `composer install
+    cp .env.example .env`
+4. Configure database or any on .env file
+5. Run `php artisan key:generate
+ php artisan migrate
+ php artisan serve`
+7. Go to link [localhost:8000](localhost:8000)
 
   
 ## Learning Laravel
