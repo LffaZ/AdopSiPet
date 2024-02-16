@@ -58,3 +58,12 @@ Route::group(['middleware'=>['auth:petcontributor'], 'prefix'=>'petcontributor',
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+
+Route::group(['prefix'=>'petcontributor', 'as'=>'petcontributor.'], function() {
+    Route::get('/about', function () {
+        return view('petcontributor.about');
+    })->name('about');
+    Route::get('/how-it-work', function () {
+        return view('petcontributor.howitwork');
+    })->name('howitwork');
+});

@@ -18,8 +18,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        <script src="https://kit.fontawesome.com/de6c49022c.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://kit.fontawesome.com/de6c49022c.js" crossorigin="anonymous"></script>
     </head>
     <body class="font-sans bg-slate-100 dark:bg-gray-800 text-gray-900 antialiased">
         <section class="flex justify-between h-screen">

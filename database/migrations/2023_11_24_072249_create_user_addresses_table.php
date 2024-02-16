@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id('kd');
+            $table->unsignedBigInteger('id_user');
             $table->uuid()->unique();
             $table->string('nama_penerima', 50);
             $table->string('no_hp', 15);
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->integer('kode_pos')->length(6);
             $table->timestamps();
 
-            $table->foreignId('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

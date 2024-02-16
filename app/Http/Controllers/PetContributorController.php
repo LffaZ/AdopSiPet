@@ -9,8 +9,8 @@ class PetContributorController extends Controller
 {
     public function index()
     {
-        $petcontributor = PetContributor::latest()->paginate(5);
-        return view('petcontributors.index', compact('petcontributors'));
+        $petcontributors = PetContributor::latest()->paginate(5);
+        return view('admin.petcontributors.index', compact('petcontributors'));
     }
 
     public function create()
@@ -21,11 +21,12 @@ class PetContributorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nama' => 'required',
-            'Jenkel' => 'required',
-            'Email' => 'required',
-            'No_hp' => 'required',
-            'Tgl_lahir' => 'required'
+            'nama' => 'required',
+            'email' => 'required',
+            'jenkel' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'tgl_lahir' => 'required'
         ]);
 
         PetContributor::create($request->all());
@@ -45,11 +46,12 @@ class PetContributorController extends Controller
     public function update(Request $request, PetContributor $petcontributor)
     {
         $request->validate([
-            'Nama' => 'required',
-            'Jenkel' => 'required',
-            'Email' => 'required',
-            'No_hp' => 'required',
-            'Tgl_lahir' => 'required'
+            'nama' => 'required',
+            'email' => 'required',
+            'jenkel' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'tgl_lahir' => 'required'
         ]);
 
         $petcontributor->update($request->all());

@@ -4,29 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Adoption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+
 
 class AdoptionController extends Controller
 {
     public function index()
     {
-        $adoption = Adoption::latest()->paginate(5);
-        return view('adoptions.index', compact('adoptions'));
+        $adoptions = Adoption::latest()->paginate(5);
+        $guard = Config::get('auth.defaults.guard');
+        if ($guard == 'web') {
+            return view('admin.adoptions.index', compact('adoptions'));
+        } elseif ($guard == 'petcontributor'){
+            return view('petcontributor.adoptions.index', compact('adoptions'));
+        }
     }
 
     public function create()
     {
-        return view('adoptions.create');
+        // return view('petcontributor.adoptions.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'Tanggal' => 'required',
-            'Total_nominal' => 'required',
-            'Mtd_bayar' => 'required',
-            'Stts_pengiriman' => 'required',
-            'Id_pengadopsi' => 'required',
-            'Id_penyedia' => 'required'
+            'tanggal' => 'required',
+            'total_nominal' => 'required',
+            'mtd_bayar' => 'required',
+            'stts_pengiriman' => 'required',
+            'id_pengadopsi' => 'required',
+            'id_penyedia' => 'required'
         ]);
 
         Adoption::create($request->all());
@@ -46,12 +53,12 @@ class AdoptionController extends Controller
     public function update(Request $request, Adoption $adoption)
     {
         $request->validate([
-            'Tanggal' => 'required',
-            'Total_nominal' => 'required',
-            'Mtd_bayar' => 'required',
-            'Stts_pengiriman' => 'required',
-            'Id_pengadopsi' => 'required',
-            'Id_penyedia' => 'required'
+            'tanggal' => 'required',
+            'total_nominal' => 'required',
+            'mtd_bayar' => 'required',
+            'stts_pengiriman' => 'required',
+            'id_pengadopsi' => 'required',
+            'id_penyedia' => 'required'
         ]);
 
         $adoption->update($request->all());

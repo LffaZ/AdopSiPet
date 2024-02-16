@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('nama', 255);
             $table->string('email')->unique();
             $table->string('password');
+            $table->text('foto', 500)->nullable();
             $table->enum('jenkel', ['laki-laki', 'perempuan', 'lainnya']);
+            $table->text('alamat');
             $table->string('no_hp', 15);
             $table->date('tgl_lahir');
             $table->timestamp('email_verified_at')->nullable();

@@ -29,6 +29,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Tandai bahwa pengguna telah melihat instruksi
+        $request->session()->put('instruction_seen', true);
+
         return redirect()->intended(RouteServiceProvider::PET_CONTRIBUTOR_HOME);
 
         // if (auth()->user()->is_admin === 1) {

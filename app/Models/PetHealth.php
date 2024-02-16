@@ -9,9 +9,9 @@ class PetHealth extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Foto_cekdokter', 'Stts_vaksin', 'Stts_steril', 'Riwayat_penyakit'];
+    protected $fillable = ['foto_cekdokter', 'stts_vaksin', 'stts_steril', 'riwayat_penyakit', 'kd_pet'];
     public function pet()
     {
-        return $this->hasOne(Pet::class);
+        return $this->belongsTo(Pet::class);
     }
 }

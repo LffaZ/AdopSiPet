@@ -12,6 +12,9 @@ class PetDetail extends Model
     protected $guarded = ['kd'];
     public function pet()
     {
-        return $this->hasOne(Pet::class);
+        return $this->belongsTo(Pet::class);
     }
 }
+
+// satu pet detail punya satu pet
+// pet health punya sa

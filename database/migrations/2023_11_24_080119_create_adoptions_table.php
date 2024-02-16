@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('adoptions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_pengadopsi');
+            $table->unsignedBigInteger('id_penyedia');
+            $table->unsignedBigInteger('kd_pet');
             $table->date('tanggal');
             $table->integer('total_nominal');
             $table->string('mtd_bayar', 50);
             $table->enum('stts_pengiriman', ['dikemas', 'dikirim', 'sampai']);
 
-            $table->foreignId('id_pengadopsi')->references('id')->on('users');
-            $table->foreignId('id_penyedia')->references('id')->on('pet_contributors');
+            $table->foreign('id_pengadopsi')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_penyedia')->references('id')->on('pet_contributors')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
 
             // revisi terbaru
-            $table->foreignId('kd_pet')->references('kd')->on('pets');
+            $table->foreign('kd_pet')->references('kd')->on('pets')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

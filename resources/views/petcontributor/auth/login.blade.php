@@ -3,6 +3,7 @@
 <x-petcontributor-guest-layout>
         <x-slot name="logo">
             <!-- Logo "Pet Contributor" -->
+            <img src="{{ asset('img/logo/logo-primary.png') }}">
         </x-slot>
 
         <!-- Session Status -->
@@ -11,7 +12,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <h2 class="text-4xl font-medium text-center">Pet Contributor Login</h2>
+        <h2 class="text-4xl pt-2 telegraf font-thin text-left">Halo,</h2>
+        <h2 class="text-4xl pb-2 telegraf font-semibold text-left">Selamat Datang!</h2>
         <form method="POST" action="{{ route('petcontributor.login') }}">
             @csrf
 

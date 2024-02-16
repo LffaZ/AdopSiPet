@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pet_details', function (Blueprint $table) {
             $table->id('kd');
+            $table->unsignedBigInteger('kd_pet');
             $table->enum('jenkel', ['betina', 'jantan']);
             $table->text('deskripsi');
             $table->string('warna');
@@ -21,6 +22,9 @@ return new class extends Migration
             $table->integer('usia');
             $table->string('karakter', 255);
             $table->timestamps();
+
+            $table->foreign('kd_pet')->references('kd')->on('pets')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 

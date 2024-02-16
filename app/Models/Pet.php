@@ -11,22 +11,21 @@ class Pet extends Model
 
     // protected $guarded = ['id', 'kd_petdetail', 'kd_pethealth'];
     protected $fillable = [
+        'nama',
         'category',
-        'sts_kepemilikan',
+        'stts_kepemilikan',
         'harga',
-        'kd_petdetail',
-        'kd_pethealth',
         'id_petcontributor',
     ];
 
     // Parent Table (yg primary keynya di tabel pet):
     public function petdetail()
     {
-        return $this->belongsTo(PetDetail::class, 'kd_petdetail');
+        return $this->hasOne(PetDetail::class, 'kd_petdetail');
     }
     public function pethealth()
     {
-        return $this->belongsTo(PetHealth::class, 'kd_pethealth');
+        return $this->hasOne(PetHealth::class, 'kd_pethealth');
     }
     public function petcontributor()
     {

@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class FavoritController extends Controller
 {
-    //
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin')->only(['index', 'destroy']);
+    //     $this->middleware('auth')->only(['create', 'destroy']);
+    // }
+
     public function index()
     {
-        $favorit = Favorit::latest();
-        return view('favorits.index', compact('favorits'));
+        $favorits = Favorit::latest()->paginate(10);
+        return view('admin.favorits.index', compact('favorits'));
     }
 
     public function store(Request $request)

@@ -36,7 +36,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            // 'admin' => \App\Http\Middleware\CheckAdmin::class,
+            \App\Http\Middleware\CheckAdmin::class,
+            \App\Http\Middleware\CheckFirstLogin::class,
         ],
 
         'api' => [
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
-        // 'auth:petcontributor' => \App\Http\Middleware\Authenticate::class,
+        // 'auth:petcontributor' => \App\Http\Middleware\CheckFirstLogin::class,
+        'CheckFirstLogin' => \App\Http\Middleware\CheckFirstLogin::class,
     ];
 }

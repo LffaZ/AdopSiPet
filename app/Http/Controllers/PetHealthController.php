@@ -10,7 +10,7 @@ class PetHealthController extends Controller
 {
     public function index()
     {
-        $pethealth = PetHealth::latest()->paginate(5);
+        $pethealths = PetHealth::latest()->paginate(5);
         return view('pethealths.index', compact('pethealths'));
     }
 
@@ -21,37 +21,42 @@ class PetHealthController extends Controller
 
     public function store(Request $request, Pet $pet)
     {
-        $data = $request->validated();
-        $petStatus = Pet::findOrFail($data['kd_pet'])->stts_kepemilikan;
-        if ($petStatus == 'liar') {
-            $request->validate([
-                'Foto_cekdokter' => 'required',
-                'Stts_vaksin' => 'required',
-                'Stts_steril' => 'required',
-                'Riwayat_penyakit' => 'required'
-            ]);
+        // $petStatus = Pet::findOrFail($data['kd_pet'])->stts_kepemilikan;
+        // if ($petStatus == 'liar') {
+        $request->validate([
+            'foto_cekdokter' => 'required',
+            'stts_vaksin' => 'required',
+            'stts_steril' => 'required',
+            'riwayat_penyakit' => 'required',
+            'kd_pet' => 'required',
 
-            PetHealth::create($request->all());
-        }
-        
+        ]);
+
+
+        $petHealth = PetHealth::create($request->all());
+
+        // }
+
         return redirect()->route('pethealths.index')->with('success', 'PetHealth created successfull');
     }
 
     public function show(PetHealth $pethealth)
     {
-        return view('pethealths.show',compact('pethealth'));
+        return view('pethealths.show', compact('pethealth'));
     }
 
     public function edit(PetHealth $pethealth)
     {
-        return view('pethealths.edit',compact('pethealth'));
+        return view('pethealths.edit', compact('pethealth'));
     }
 
     public function update(Request $request, PetHealth $pethealth)
     {
         $request->validate([
-            'Kd_pet' => 'required',
-            'Foto' => 'required'
+            'foto_cekdokter' => 'required',
+            'stts_vaksin' => 'required',
+            'stts_steril' => 'required',
+            'riwayat_penyakit' => 'required'
         ]);
 
         $pethealth->update($request->all());
@@ -62,6 +67,5 @@ class PetHealthController extends Controller
     {
         $pethealth->delete();
         return redirect()->route('pethealths.index')->with('success', 'PetHealth deleted successfully');
-        //
     }
 }

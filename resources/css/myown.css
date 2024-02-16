@@ -31,11 +31,61 @@
     @apply transition-colors duration-200;
 }
 
-/* Tambahkan CSS untuk ikon mata (eye) */
-.fa-eye {
-    cursor: pointer;
+div[modal-backdrop] {
+    background-color: rgb(17 24 39 / 50%);
 }
 
+@media (prefers-color-scheme: dark) {
+    div[modal-backdrop] {
+        background-color: rgb(17 24 39 / 40%);
+    }
+}
+
+/* Custom Font */
+@font-face {
+    font-family: 'Telegraf';
+    src: url(../fonts/Telegraf-Regular.otf) format(opentype);
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Telegraf';
+    src: url(../fonts/Telegraf-UltraBold.otf) format(opentype);
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Telegraf';
+    src: url(../fonts/Telegraf-UltraLight.otf) format(opentype);
+    font-weight: light;
+}
+
+.bg-login {
+    background-image: url('../../public/img/login-bg.jpg');
+}
+
+.telegraf {
+    font-family: 'Telegraf', Helvetica, sans-serif;
+    /* font-weight: normal; */
+}
+
+.telegraf .bold{
+    font-family: 'Telegraf', Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.telegraf .light{
+    font-family: 'Telegraf', Helvetica, sans-serif;
+    font-weight: light;
+}
+
+.bg-blurry-orange {
+    background-image: url('../../public/img/guest-hero-2.png');
+    
+}
+
+.bg-dark-blurry-orange {
+    background-image: url('../../public/img/dark-guest-hero.jpg');
+    background-size: cover;
+}
 
 /* This example part of kwd-dashboard see https://kamona-wd.github.io/kwd-dashboard/ */
 /* So here we will write some classes to simulate dark mode and some of tailwind css config in our project */
@@ -95,4 +145,25 @@
 
 .hover\:overflow-y-auto:hover {
     overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

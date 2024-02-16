@@ -12,8 +12,8 @@ class SearchHistoryController extends Controller
 
     public function index()
     {
-        $searchhistory = SearchHistory::latest()->paginate(3);
-        return view('searchhistories.index', compact('searchhistorys'));
+        $searchhistories = SearchHistory::latest()->paginate(3);
+        return view('admin.searchhistories.index', compact('searchhistories'));
     }
     // public function create()
     // {

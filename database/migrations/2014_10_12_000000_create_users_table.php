@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('nama', 255);
             $table->string('email')->unique();
             $table->string('password');
+            $table->text('foto', 500)->nullable();
             $table->enum('jenkel', ['laki-laki', 'perempuan', 'lainnya'])->nullable();
             $table->string('no_hp', 15)->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin')->nullable();
+            $table->enum('status', ['active', 'suspended', 'banned', 'inactive', 'pending'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

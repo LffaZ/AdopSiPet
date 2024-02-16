@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdoptionController;
 use App\Http\Controllers\AdminController;
 // use App\Http\Controllers\PetContributorAuthController;
-// use App\Http\Controllers\PetContributorDashboardController;
+use App\Http\Controllers\PetContributorDashboardController;
 use App\Http\Controllers\PetContributorController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\PetDetailController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\SearchHistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Providers\RouteServiceProvider;
 use App\Models\SearchHistory;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/petcontributor', function () {
+    return view('petcontributor.welcome');
+});
 
 Route::prefix('latihan')->group(function () {
     Route::get('/1', function () {
@@ -43,33 +47,16 @@ Route::prefix('latihan')->group(function () {
     });
 });
 
-// useless routes
-// Just to demo sidebar dropdown links active states.
-Route::get('/buttons/text', function () {
-    return view('buttons-showcase.text');
-})->middleware(['auth', 'admin'])->name('buttons.text');
-
-Route::get('/buttons/icon', function () {
-    return view('buttons-showcase.icon');
-})->middleware(['auth', 'admin'])->name('buttons.icon');
-
-Route::get('/buttons/text-icon', function () {
-    return view('buttons-showcase.text-icon');
-})->middleware(['auth', 'admin'])->name('buttons.text-icon');
-
-
 Route::get('/404', function () {
     return view('error');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+// USER
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/explore', function () {
+        return view('dashboard');
+    })->name('explore');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,29 +64,32 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/petcontributor/dashboard', function () {
-    return view('petcontributor.dashboard');
-})->middleware(['auth:petcontributor'])->name('petcontributor.dashboard');
+// ADMIN
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+// PET CONTRIBUTOR
+Route::get('/petcontributor/dashboard', [PetContributorDashboardController::class, 'dashboard'])
+    ->middleware(['auth:petcontributor', 'CheckFirstLogin'])
+    // ->middleware('auth:petcontributor')
+    ->name('petcontributor.dashboard');
 
 
 // Route::middleware('auth:petcontributor')->prefix('petcontributor')->group(function () {
-Route::group(['middleware'=>['auth:petcontributor'], 'prefix'=>'petcontributor', 'as'=>'petcontributor.'], function() {
+Route::group(['middleware' => ['auth:petcontributor'], 'prefix' => 'petcontributor', 'as' => 'petcontributor.'], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::group(['prefix' => 'petcontributor'], function () {
-    // Route::get('/login', [PetContributorAuthController::class, 'showLoginForm'])->name('petcontributor.login');
-    // Route::post('/login', [PetContributorAuthController::class, 'login']);
-    // Route::get('/register', [PetContributorAuthController::class, 'showRegistrationForm'])->name('petcontributor.register');
-    // Route::post('/register', [PetContributorAuthController::class, 'register']);
-    // Route::get('/logout', [PetContributorAuthController::class, 'logout']);
-// });
-
 require __DIR__ . '/petcontributorauth.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin-dashboard.php';
+require __DIR__ . '/petcontributor-dashboard.php';
 
+
+// ADMIN ROUTE -- GONNA BE CHANGED
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::post('/store', [UserController::class, 'store']);
@@ -117,6 +107,7 @@ Route::prefix('useraddress')->group(function () {
 
 Route::prefix('pet')->group(function () {
     Route::post('/', [PetController::class, 'index']);
+    Route::get('/search', [PetController::class, 'search'])->name('pet.search');
     Route::post('/store', [PetController::class, 'store']);
     Route::post('{kd}/edit', [PetController::class, 'show']);
     Route::post('{kd}/update', [PetController::class, 'update']);

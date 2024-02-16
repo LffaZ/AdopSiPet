@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('pet_healths', function (Blueprint $table) {
             $table->id('kd');
+            $table->unsignedBigInteger('kd_pet');
             $table->string('foto_cekdokter', 255);
             $table->string('stts_vaksin', 255);
             $table->string('stts_steril', 255);
             $table->string('riwayat_penyakit', 255);
             $table->timestamps();
+
+            $table->foreign('kd_pet')->references('kd')->on('pets')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

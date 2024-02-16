@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('favorits', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_pengadopsi');
+            $table->unsignedBigInteger('kd_pet');
             
-            $table->foreignId('id_pengadopsi')->references('id')->on('users');
-            $table->foreignId('kd_pet')->references('kd')->on('pets');
+            $table->foreign('id_pengadopsi')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kd_pet')->references('kd')->on('pets')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });

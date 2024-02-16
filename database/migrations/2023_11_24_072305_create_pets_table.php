@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->id('kd');
+            $table->unsignedBigInteger('id_petcontributor');
+            $table->string('nama');
             $table->enum('category', ['cat', 'dog', 'rabbit', 'hamster', 'bird', 'fish', 'others']);
-            $table->enum('sts_kepemilikan', ['liar', 'pribadi']);
+            $table->enum('stts_kepemilikan', ['liar', 'pribadi']);
             $table->integer('harga');
+            $table->foreign('id_petcontributor')->references('id')->on('pet_contributors')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
 
-            $table->foreignId('kd_petdetail')->references('kd')->on('pet_details');
-            $table->foreignId('kd_pethealth')->references('kd')->on('pet_healths');
-            $table->foreignId('id_petcontributor')->references('id')->on('pet_contributors');
+            
         });
     }
 

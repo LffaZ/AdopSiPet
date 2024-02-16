@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('search_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pengadopsi')->references('id')->on('users');
+            $table->unsignedBigInteger('id_user');
             $table->string('keyword', 100);
             $table->timestamps();
+            
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

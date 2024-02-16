@@ -9,61 +9,61 @@ class UserAddressController extends Controller
 {
     public function index()
     {
-        $useraddress = UserAddress::latest()->paginate(5);
-        return view('useraddresss.index', compact('useraddresss'));
+        $useraddresses = UserAddress::latest()->paginate(5);
+        return view('admin.useraddresses.index', compact('useraddresses'));
     }
 
     public function create()
     {
-        return view('useraddresss.create');
+        return view('admin.useraddresses.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'Nama_penerima' => 'required',
-            'No_hp' => 'required',
-            'Kota' => 'required',
-            'Kecamatan' => 'required',
-            'Jalan' => 'required',
-            'No_rumah' => 'required',
-            'Kode_pos' => 'required'
+            'nama_penerima' => 'required',
+            'no_hp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'jalan' => 'required',
+            'no_rumah' => 'required',
+            'kode_pos' => 'required'
         ]);
 
         UserAddress::create($request->all());
-        return redirect()->route('useraddresss.index')->with('success', 'UserAddress created successfull');
+        return redirect()->route('useraddresses.index')->with('success', 'UserAddress created successfull');
     }
 
     public function show(UserAddress $useraddress)
     {
-        return view('useraddresss.show',compact('useraddress'));
+        return view('useraddresses.show',compact('useraddress'));
     }
 
     public function edit(UserAddress $useraddress)
     {
-        return view('useraddresss.edit',compact('useraddress'));
+        return view('useraddresses.edit',compact('useraddress'));
     }
 
     public function update(Request $request, UserAddress $useraddress)
     {
         $request->validate([
-            'Nama_penerima' => 'required',
-            'No_hp' => 'required',
-            'Kota' => 'required',
-            'Kecamatan' => 'required',
-            'Jalan' => 'required',
-            'No_rumah' => 'required',
-            'Kode_pos' => 'required'
+            'nama_penerima' => 'required',
+            'no_hp' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'jalan' => 'required',
+            'no_rumah' => 'required',
+            'kode_pos' => 'required'
         ]);
 
         $useraddress->update($request->all());
-        return redirect()->route('useraddresss.index')->with('success', 'UserAddress updated successfully');
+        return redirect()->route('useraddresses.index')->with('success', 'UserAddress updated successfully');
     }
 
     public function destroy(UserAddress $useraddress)
     {
         $useraddress->delete();
-        return redirect()->route('useraddresss.index')->with('success', 'UserAddress deleted successfully');
+        return redirect()->route('useraddresses.index')->with('success', 'UserAddress deleted successfully');
         //
     }
 }
