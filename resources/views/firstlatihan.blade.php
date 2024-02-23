@@ -16,120 +16,62 @@
 </head>
 
 <body class="dark:pt-0.75">
-    <div class="bg-blurry-orange">
-        <!-- ====== Navbar Section Start -->
-        <header x-data="{navbarOpen: false}" class="flex items-center w-full">
-            <div class="container mx-auto">
-                <div class="relative flex items-center justify-between -mx-4">
-                    <div class="flex flex-row max-w-full px-4 w-60">
-                        <a href="/" class="block w-full py-5">
-                            <!-- <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg" alt="logo" class="dark:hidden" />
-                                <img src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg" alt="logo" class="hidden dark:block" /> -->
-                            <img src="{{ asset('img/logo/logo-text.png') }}" alt="logo">
-                        </a>
-                    </div>
-                    <div class="flex items-center justify-between w-full px-4">
-                        <div>
-                            <button @click="navbarOpen = !navbarOpen" :class="navbarOpen && 'navbarTogglerActive' " id="navbarToggler" class="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden">
-                                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                                <span class="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
-                            </button>
-                            <nav :class="!navbarOpen && 'hidden' " id="navbarCollapse" class="absolute right-4 top-full w-full max-w-[250px] rounded-lg py-5 px-6 shadow lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none dark:bg-dark-2 lg:dark:bg-transparent">
-                                <ul class="block lg:flex">
-                                    <li>
-                                        <a href="/" class="flex py-2 text-base font-medium text-body-color lg:ml-12 lg:inline-flex hover:text-white">
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/" class="flex py-2 text-base font-medium text-body-color lg:ml-12 lg:inline-flex hover:text-white">
-                                            Payment
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/" class="flex py-2 text-base font-medium text-body-color lg:ml-12 lg:inline-flex hover:text-white">
-                                            Features
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        @if (Route::has('login'))
-                        <div class="justify-end hidden pr-16 sm:flex lg:pr-0">
-                            <i class="py-4 fa-solid moon fa-moon text-body-color dark:text-white cursor-pointer hover:text-[#FF862F]"></i>
-                            <i class="py-4 fa-solid sun fa-sun text-body-color dark:text-[#FF862F] cursor-pointer hover:text-[#FF862F]"></i>
-                            @auth
-                            <a href="{{ url('/dashboard') }}" class="py-3 text-base px-7 font-medium text-body-color hover:text-[#FF862F]">Beranda</a>
-                            @else
-                            <a href="{{ route('login') }}" class="py-3 text-base px-7 font-medium text-body-color hover:text-[#FF862F]">Masuk</a>
-
-                            @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="py-3 text-base font-medium text-white rounded-full bg-[#FF862F] px-4 hover:bg-white hover:text-[#FF862F] focus:border-2 focus:text-[#FF862F] focus:bg-transparent focus:border-[#FFC25A]">Daftar</a>
-                            @endif
-                            @endauth
-                        </div>
-                        @endif
-                    </div>
-                </div>
+<div class="max-w-md mx-auto mt-5">
+    <form method="POST" action="{{ route('petcontributor.pets.create.uji-coba') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        @csrf
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="id_petcontributor">
+                ID Petcontributor
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_petcontributor" type="text" placeholder="ID Petcontributor" name="id_petcontributor">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">
+                Nama
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nama" type="text" placeholder="Nama" name="nama">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                Category
+            </label>
+            <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" id="category" name="category">
+                <option value="cat">Kucing</option>
+                <option value="dog">Anjing</option>
+                <option value="rabbit">Kelinci</option>
+                <option value="hamster">Hamster</option>
+                <option value="bird">Burung</option>
+                <option value="fish">Ikan</option>
+                <option value="others">Lainnya</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="stts_kepemilikan">
+                Status Kepemilikan
+            </label>
+            <div class="mt-2">
+                <label class="inline-flex items-center">
+                    <input type="radio" class="form-radio" name="stts_kepemilikan" value="liar">
+                    <span class="ml-2">Liar</span>
+                </label>
+                <label class="inline-flex items-center ml-6">
+                    <input type="radio" class="form-radio" name="stts_kepemilikan" value="pribadi">
+                    <span class="ml-2">Pribadi</span>
+                </label>
             </div>
-        </header>
-        <!-- ====== Navbar Section End -->
-
-        <!-- ====== Home Section Start -->
-        <section class="overflow-hidden pt-5 pb-5 lg:pt-[15px] lg:pb-[40px]">
-            <div class="container mx-auto">
-                <div class="flex flex-wrap items-center justify-between -mx-4">
-                    <div class="w-full px-4 xl:w-3/6 lg:w-3/4">
-                        <div class="mt-7 lg:mt-0">
-                            <h2 class="telegraf mb-5 text-8xl lg:text-7xl text-[#ff6c03] sm:text-[40px]/[48px]">
-                                Temui sahabat barumu
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <!-- ====== Home Section End -->
-    </div>
-    <!-- <div class="flex bg-white rounded-full mx-20 h-16 -mt-7 shadow-lg justify-between items-center">
-        <div class="flex px-5 w-full text-gray-500 justify-between items-center">
-            <form action="{{ route('pet.search') }}" method="GET">
-                <input type="text" name="pet" class="w-3/4 h-16 bg-white outline-0 border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-full" placeholder="Cari berdasarkan nama atau kategori">
-                <div class="w-1/4 flex flex-row justify-between items-center">
-                    <div class="flex flex-row justify-start gap-5 w-full items-center">
-                        <div class="bg-gray-400 w-[1.25px] py-1 h-12 rounded-full"></div>
-                        <i class="-mt-[2px] fa-solid fa-location-dot"></i>
-                        <a href=""><span class="-ml-2 text-gray-700">Lokasi</span></a>
-                    </div>
-                    <a class="rounded-full bg-green text-dark py-1 px-5 place-items-end"><button type="submit">Cari</button></a>
-                </div>
-            </form>
         </div>
-    </div> -->
-
-    <!-- Search Input -->
-    <section class="overflow-visible flex justify-center -mt-7 bg-gray-600">
-        <div class="flex bg-white rounded-full mx-auto h-16 -mt-7 shadow-lg justify-between items-center w-11/12">
-            <form action="{{ route('pet.search') }}" method="GET" class="flex px-5 w-full text-gray-500 justify-between items-center">
-                <input type="text" name="pet" class="w-full h-16 bg-white outline-0 border-none focus:ring-0 focus:ring-transparent focus:border-transparent focus:outline-none rounded-full" placeholder="Cari berdasarkan nama atau kategori">
-                <div class="w-1/4 flex flex-row justify-between items-center">
-                    <div class="flex flex-row justify-start gap-5 w-full items-center">
-                        <div class="bg-gray-400 w-[1.25px] py-1 h-12 rounded-full"></div>
-                        <i class="-mt-[2px] fa-solid fa-location-dot"></i>
-                        <a href=""><span class="-ml-2 text-gray-700">Lokasi</span></a>
-                    </div>
-                    <button type="submit" class="rounded-full bg-green text-dark py-1 px-5 place-items-end">Cari</button>
-                </div>
-            </form>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="harga">
+                Harga
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="harga" type="text" placeholder="Harga" name="harga">
         </div>
-    </section>
-
-    <section class="overflow-hidden pt-5 pb-5 lg:pt-[15px] lg:pb-[40px] bg-white dark:bg-gray-600">
-        <div class="container mx-auto">
-            <h2 class="my-5 text-3xl lg:text-4xl text-gray-800 sm:text-[40px]/[48px]">Populer</h2>
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Simpan
+            </button>
         </div>
-    </section>
+    </form>
+</div>
 
 </body>

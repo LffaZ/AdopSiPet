@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PetDetail;
 use App\Models\Pet;
+use App\Models\PetDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PetDetailController extends Controller
 {
@@ -14,14 +15,19 @@ class PetDetailController extends Controller
         return view('petdetails.index', compact('petdetails'));
     }
 
-    public function create()
+    public function create($kd)
     {
-        return view('petdetails.create');
+        $pet = Pet::where('kd', $kd)->first();
+        $petdetail = PetDetail::where('kd_pet', $kd)->first();
+        // $pethealth = PetHealth::where('kd_pet', $kd)->first();
+        return view('petcontributor.pets.create-detail',compact('pet', 'petdetail'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        // cek request ada kd pet atau tidak
+        dd($request);
+        $data = $request->validate([
             'jenkel' => 'required',
             'deskripsi' => 'required',
             'warna' => 'required',
@@ -29,37 +35,42 @@ class PetDetailController extends Controller
             'panjang' => 'required',
             'usia' => 'required',
             'karakter' => 'required',
-            'kd_pet' => pet()->id(),
         ]);
 
-        $petDetail = PetDetail::create($request->all());
-        return redirect()->route('petdetails.index')->with('success', 'PetDetail created successfull');
+        // $data['kd_pet'] = pet()->id();
+        $data['kd_pet'] = session('kd_pet');
+
+        return redirect()->route('petcontributor.pethealths.create')->with('success', 'PetDetail created successfull');
     }
 
     public function show(PetDetail $petdetail)
     {
-        return view('petdetails.show',compact('petdetail'));
+        return view('petcontributor.petdetails.show',compact('petdetail'));
     }
 
-    public function edit(PetDetail $petdetail)
+    public function edit($kd)
     {
-        return view('petdetails.edit',compact('petdetail'));
+        $pet = Pet::where('kd', $kd)->first();
+        $petdetail = PetDetail::where('kd_pet', $kd)->first();
+        // $pethealth = PetHealth::where('kd_pet', $kd)->first();
+        return view('petcontributor.pets.update-detail',compact('pet', 'petdetail'));
     }
 
-    public function update(Request $request, PetDetail $petdetail)
+    public function update(Request $request, $kd)
     {
-        $request->validate([
+        $petdetail = PetDetail::where('kd_pet', $kd);
+        $data = $request->validate([
             'jenkel' => 'required',
             'deskripsi' => 'required',
             'warna' => 'required',
             'berat' => 'required',
             'panjang' => 'required',
             'usia' => 'required',
-            'karakter' => 'required'
+            'karakter' => 'required',
         ]);
 
-        $petdetail->update($request->all());
-        return redirect()->route('petdetails.index')->with('success', 'PetDetail updated successfully');
+        $petdetail->update($data);
+        return redirect()->route('petcontributor.pethealths.edit', $kd)->with('success', 'PetDetail updated successfully');
     }
 
     public function destroy(PetDetail $petdetail)

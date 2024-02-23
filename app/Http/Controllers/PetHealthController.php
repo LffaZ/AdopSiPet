@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PetHealth;
+use App\Models\PetDetail;
 use App\Models\Pet;
 use Illuminate\Http\Request;
 
@@ -14,53 +15,57 @@ class PetHealthController extends Controller
         return view('pethealths.index', compact('pethealths'));
     }
 
-    public function create()
+    public function create($kd)
     {
-        return view('pethealths.create');
+        $petDetail = PetDetail::where('kd_pet', $kd)->first();
+        $kd_petdetail = $petDetail->kd;
+        return view('petcontributor.pets.create-health', compact('kd_petdetail', 'petDetail'));
     }
 
-    public function store(Request $request, Pet $pet)
+    public function store(Request $request, $kd)
     {
-        // $petStatus = Pet::findOrFail($data['kd_pet'])->stts_kepemilikan;
-        // if ($petStatus == 'liar') {
-        $request->validate([
+        $data = $request->validate([
             'foto_cekdokter' => 'required',
             'stts_vaksin' => 'required',
             'stts_steril' => 'required',
             'riwayat_penyakit' => 'required',
-            'kd_pet' => 'required',
-
         ]);
-
-
-        $petHealth = PetHealth::create($request->all());
-
-        // }
-
-        return redirect()->route('pethealths.index')->with('success', 'PetHealth created successfull');
+        $fileName = uniqid() . '_' . time() . '.' . $data['foto_cekdokter']->getClientOriginalExtension();
+        $path = $data['foto_cekdokter']->storeAs('petphoto', $fileName, 'public');
+        $data['foto_cekdokter'] = $path;
+        $data['kd_pet'] = $kd;
+        PetHealth::create($data);
+        return redirect()->route('petcontributor.pets.index')->with('success', 'PetHealth created successfull');
     }
 
     public function show(PetHealth $pethealth)
     {
-        return view('pethealths.show', compact('pethealth'));
+        return view('petcontributor.pethealths.show', compact('pethealth'));
     }
 
-    public function edit(PetHealth $pethealth)
+    public function edit($kd)
     {
-        return view('pethealths.edit', compact('pethealth'));
+        $pet = Pet::where('kd', $kd)->first();
+        $petdetail = PetDetail::where('kd_pet', $kd)->first();
+        $pethealth = PetHealth::where('kd_pet', $kd)->first();
+        return view('petcontributor.pets.update-health', compact('pet', 'petdetail','pethealth'));
     }
 
-    public function update(Request $request, PetHealth $pethealth)
+    public function update(Request $request, $kd)
     {
-        $request->validate([
+        $pethealth = PetHealth::where('kd_pet', $kd);
+        $data = $request->validate([
             'foto_cekdokter' => 'required',
             'stts_vaksin' => 'required',
             'stts_steril' => 'required',
-            'riwayat_penyakit' => 'required'
-        ]);
+            'riwayat_penyakit' => 'required',
+        ]); 
+        $fileName = uniqid() . '_' . time() . '.' . $data['foto_cekdokter']->getClientOriginalExtension();
+        $path = $data['foto_cekdokter']->storeAs('photo_cekdokter', $fileName, 'public');
+        $data['foto_cekdokter'] = $path;
 
-        $pethealth->update($request->all());
-        return redirect()->route('pethealths.index')->with('success', 'PetHealth updated successfully');
+        $pethealth->update($data);
+        return redirect()->route('petcontributor.pets.index')->with('success', 'PetHealth updated successfully');
     }
 
     public function destroy(PetHealth $pethealth)

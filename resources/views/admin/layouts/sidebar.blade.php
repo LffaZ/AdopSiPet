@@ -28,10 +28,10 @@
                     <i class="fa-solid fa-map-location-dot w-5 h-4"></i>
                     <span class="mx-2 text-sm font-medium">Alamat</span>
                 </a>
-                <a href="{{ route('favorits.index') }}" class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                <!-- <a href="{{ route('favorits.index') }}" class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <i class="fa-solid fa-heart w-5 h-4"></i>
                     <span class="mx-2 text-sm font-medium">Favorit</span>
-                </a>
+                </a> -->
                 <a href="{{ route('searchhistories.index') }}" class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <i class="fa-solid fa-clock-rotate-left w-5 h-4"></i>
                     <span class="mx-2 text-sm font-medium">Riwayat Pencarian</span>

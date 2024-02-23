@@ -13,33 +13,33 @@
                     <span class="mx-2 text-base font-normal">Beranda</span>
                 </a> 
 
-                <a href="/insight" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                <!-- <a href="/insight" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"> -->
                     <!-- <i class="fa-solid fa-arrow-up-right-dots text-2xl w-7 h-4"></i> -->
-                    <img src="{{ asset('icon/increase.png') }}" alt="" width="20">
+                    <!-- <img src="{{ asset('icon/increase.png') }}" alt="" width="20">
 
                     <span class="mx-2 text-base font-normal">Analisa</span>
-                </a>
+                </a> -->
                 <a href="{{ route('petcontributor.adoptions.index') }}" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <img src="{{ asset('icon/clipboard-regular.png') }}" alt="" width="20">
                     <!-- <i class="fa-solid fa-clipboard text-2xl w-7 h-4"></i> -->
                     <span class="mx-2 text-base font-normal">Track Adopsi</span>
                 </a>
-                <a href="{{ route('petcontributor.feedbacks.index') }}" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                    <img src="{{ asset('icon/feedback-regular.png') }}" alt="" width="20">
+                <!-- <a href="{{ route('petcontributor.feedbacks.index') }}" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <img src="{{ asset('icon/feedback-regular.png') }}" alt="" width="20"> -->
                     <!-- <i class="fa-regular fa-comments text-2xl w-7 h-4"></i> -->
-                    <span class="mx-2 text-base font-normal">Masukan</span>
-                </a>
+                    <!-- <span class="mx-2 text-base font-normal">Masukan</span>
+                </a> -->
                 <a href="{{ route('petcontributor.pets.index') }}" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                     <img src="{{ asset('icon/pawprint-regular.png') }}" alt="" width="20">
                     <!-- <i class="fa-solid fa-paw text-2xl w-7 h-4"></i> -->
                     <span class="mx-2 text-base font-normal">Hewan</span>
                 </a>
                 
-                <a href="/petcontributor/help" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                    <img src="{{ asset('icon/question-regular.png') }}" alt="" width="20">
+                <!-- <a href="/petcontributor/help" class="flex items-center px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-[#FFC296] dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                    <img src="{{ asset('icon/question-regular.png') }}" alt="" width="20"> -->
                     <!-- <i class="fa-regular fa-circle-question text-2xl w-7 h-4"></i> -->
-                    <span class="mx-2 text-base font-normal">Pusat Bantuan</span>
-                </a>
+                    <!-- <span class="mx-2 text-base font-normal">Pusat Bantuan</span>
+                </a> -->
             </div>
 
         </nav>

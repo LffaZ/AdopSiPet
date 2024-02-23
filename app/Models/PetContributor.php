@@ -25,6 +25,10 @@ class PetContributor extends Authenticatable
     {
         return $this->hasMany(Feedback::class);
     }
+    public function adoption()
+    {
+        return $this->hasMany(Adoption::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

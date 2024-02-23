@@ -9,7 +9,6 @@ use App\Http\Controllers\PetContributorController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\PetDetailController;
 use App\Http\Controllers\PetHealthController;
-use App\Http\Controllers\PetPhotoController;
 use App\Http\Controllers\AdoptionController;
 
 use Illuminate\Support\Facades\Route;
@@ -62,6 +61,7 @@ Route::middleware(['auth', 'admin'])->prefix('petcontributors')->group(function 
 
 Route::middleware(['auth', 'admin'])->prefix('pets')->group(function () {
     Route::get('/', [PetController::class, 'index'])->name('pets.index');
+    Route::get('/export', [PetController::class, 'export'])->name('pets.export');
     Route::post('/store', [PetController::class, 'store'])->name('pets.store');
     Route::post('{kd}/edit', [PetController::class, 'show'])->name('pets.show');
     Route::post('{kd}/update', [PetController::class, 'update'])->name('pets.updte');
@@ -84,16 +84,9 @@ Route::middleware(['auth', 'admin'])->prefix('pethealths')->group(function () {
     Route::delete('{kd}/delete', [PetHealthController::class, 'destroy'])->name('pethealths.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('petphotos')->group(function () {
-    Route::get('/', [PetPhotoController::class, 'index'])->name('petphotos.index');
-    Route::post('/store', [PetPhotoController::class, 'store'])->name('petphotos.store');
-    Route::post('{kd}/edit', [PetPhotoController::class, 'show'])->name('petphotos.show');
-    Route::post('{kd}/update', [PetPhotoController::class, 'update'])->name('petphotos.update');
-    Route::delete('{kd}/delete', [PetPhotoController::class, 'destroy'])->name('petphotos.destroy');
-});
-
 Route::middleware(['auth', 'admin'])->prefix('adoptions')->group(function () {
     Route::get('/', [AdoptionController::class, 'index'])->name('adoptions.index');
+    Route::get('/export', [AdoptionController::class, 'export'])->name('adoptions.export');
     Route::post('/store', [AdoptionController::class, 'store'])->name('adoptions.store');
     Route::post('{id}/edit', [AdoptionController::class, 'show'])->name('adoptions.show');
     Route::post('{id}/update', [AdoptionController::class, 'update'])->name('adoptions.update');

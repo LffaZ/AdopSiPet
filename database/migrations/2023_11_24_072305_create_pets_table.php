@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->id('kd');
             $table->unsignedBigInteger('id_petcontributor');
+            $table->string('images')->nullable();
             $table->string('nama');
             $table->enum('category', ['cat', 'dog', 'rabbit', 'hamster', 'bird', 'fish', 'others']);
             $table->enum('stts_kepemilikan', ['liar', 'pribadi']);

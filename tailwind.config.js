@@ -43,5 +43,11 @@ export default {
         },
     },
 
-    plugins: [forms, require("tailgrids/plugin"), require('flowbite/plugin')],
+    plugins: [
+        forms, 
+        require("tailgrids/plugin"), 
+        require('flowbite/plugin')({
+            charts: true,
+        }),
+    ],
 };

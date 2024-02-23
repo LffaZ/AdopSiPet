@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Portal Pemilik Hewan — {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     
     <!-- Scripts -->
-    @vite(['resources/css/app.css','resources/css/myown.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/css/myown.css', 'resources/js/app.js', 'resources/js/tab-active.js', 'resources/js/chart.js'])
     <script src="https://kit.fontawesome.com/de6c49022c.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="font-sans antialiased flex justify-between">
     @include('petcontributor.layouts.sidebar')
-    <div class="h-screen w-screen bg-gray-50 dark:bg-gray-900">
+    <div class="h-screen w-screen bg-white dark:bg-gray-900">
 
         {{-- @include('petcontributor.layouts.navigation') --}}
 
@@ -33,7 +33,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main {{ $attributes->merge(['class' => '']) }}>
             {{ $slot }}
         </main>
     </div>

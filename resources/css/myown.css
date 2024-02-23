@@ -17,6 +17,10 @@
     width: 80%;
 }
 
+.apexcharts-tooltip {
+    z-index: 2500; /* Atur nilai z-index sesuai kebutuhan */
+}
+
 @keyframes skeleton-loading {
     0% {
         background-color: hsl(200, 20%, 70%);

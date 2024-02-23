@@ -4,7 +4,7 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="h-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class="p-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        Alamat pengguna kami
+                        Alamat pengguna
                         <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Jelajahi tabel pengguna yang komprehensif dengan beragam profil, dirancang untuk menyederhanakan alur kerja Anda, meningkatkan produktivitas, memfasilitasi konektivitas, membantu dalam mendapatkan informasi, menjaga keteraturan, dan masih banyak lagi</p>
                         <hr class="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
                         <div class="flex justify-between">

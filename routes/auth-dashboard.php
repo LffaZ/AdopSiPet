@@ -10,6 +10,7 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\PetDetailController;
 use App\Http\Controllers\PetHealthController;
 use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Models\PetDetail;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +24,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:petcontributor')->prefix('petcontributor')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('pets')->group(function () {
         Route::get('/', [PetController::class, 'index'])->name('petcontributor.pets.index');
-        Route::get('/export', [PetController::class, 'export'])->name('petcontributor.pets.export');
         Route::get('/create', [PetController::class, 'create'])->name('petcontributor.pets.create');
         Route::post('/store', [PetController::class, 'store'])->name('petcontributor.pets.store');
-        Route::get('/{kd}', [PetController::class, 'petcontributorshow'])->name('petcontributor.pets.show');
+        Route::post('/store-all', [PetController::class, 'petCombined'])->name('petcontributor.pet-combined.store');
+        Route::get('/{kd}', [PetController::class, 'show'])->name('pets.show');
         Route::get('{kd}/edit', [PetController::class, 'edit'])->name('petcontributor.pets.edit');
         Route::post('{kd}/update', [PetController::class, 'update'])->name('petcontributor.pets.update');
         Route::delete('{kd}/delete', [PetController::class, 'destroy'])->name('petcontributor.pets.destroy');
@@ -48,13 +49,22 @@ Route::middleware('auth:petcontributor')->prefix('petcontributor')->group(functi
         Route::post('{kd}/update', [PetHealthController::class, 'update'])->name('petcontributor.pethealths.update');
         Route::delete('{kd}/delete', [PetHealthController::class, 'destroy'])->name('petcontributor.pethealths.destroy');
     });
+
+    Route::prefix('free-adopt')->group(function () {
+        Route::get('/', [DashboardController::class, 'freeadopt'])->name('freeadopt.index');
+        // Route::post('{kd}/store', [PetHealthController::class, 'store'])->name('petcontributor.pethealths.store');
+        // Route::get('{kd}/edit', [PetHealthController::class, 'edit'])->name('petcontributor.pethealths.edit');
+        // Route::post('{kd}/update', [PetHealthController::class, 'update'])->name('petcontributor.pethealths.update');
+        // Route::delete('{kd}/delete', [PetHealthController::class, 'destroy'])->name('petcontributor.pethealths.destroy');
+    });
+
     Route::prefix('adoptions')->group(function () {
-        Route::get('/', [AdoptionController::class, 'petcontributorindex'])->name('petcontributor.adoptions.index');
-        Route::get('/export', [AdoptionController::class, 'export'])->name('petcontributor.adoptions.export');
-        Route::post('/store', [AdoptionController::class, 'store'])->name('petcontributor.adoptions.store');
-        Route::post('{id}/edit', [AdoptionController::class, 'show'])->name('petcontributor.adoptions.show');
-        Route::post('{id}/update', [AdoptionController::class, 'update'])->name('petcontributor.adoptions.update');
-        Route::delete('{id}/delete', [AdoptionController::class, 'destroy'])->name('petcontributor.adoptions.destroy');
+        // Route::get('/', [AdoptionController::class, 'index'])->name('petcontributor.adoptions.index');
+        Route::post('/store', [AdoptionController::class, 'store'])->name('adoptions.store');
+        Route::get('/success', [AdoptionController::class, 'success'])->name('adoptions.success');
+        // Route::post('{id}/edit', [AdoptionController::class, 'show'])->name('petcontributor.adoptions.show');
+        // Route::post('{id}/update', [AdoptionController::class, 'update'])->name('petcontributor.adoptions.update');
+        // Route::delete('{id}/delete', [AdoptionController::class, 'destroy'])->name('petcontributor.adoptions.destroy');
     });
     Route::prefix('feedbacks')->group(function () {
         Route::get('/', [FeedbackController::class, 'index'])->name('petcontributor.feedbacks.index');

@@ -12,10 +12,14 @@ class Adoption extends Model
     protected $guarded = ['id'];
     public function pet()
     {
-        return $this->belongsTo(Pet::class);
+        return $this->belongsTo(Pet::class, 'kd_pet', 'kd');
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pengadopsi');
+    }
+    public function petcontributor()
+    {
+        return $this->belongsTo(PetContributor::class, 'id_penyedia');
     }
 }

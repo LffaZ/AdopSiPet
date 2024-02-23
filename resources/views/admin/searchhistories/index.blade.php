@@ -4,8 +4,8 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="h-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <caption class="p-5 pb-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                        Alamat pengguna kami
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Jelajahi tabel pengguna yang komprehensif dengan beragam profil, dirancang untuk menyederhanakan alur kerja Anda, meningkatkan produktivitas, memfasilitasi konektivitas, membantu dalam mendapatkan informasi, menjaga keteraturan, dan masih banyak lagi</p>
+                        Hewan yang paling banyak dicari
+                        <!-- <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Jelajahi tabel pengguna yang komprehensif dengan beragam profil, dirancang untuk menyederhanakan alur kerja Anda, meningkatkan produktivitas, memfasilitasi konektivitas, membantu dalam mendapatkan informasi, menjaga keteraturan, dan masih banyak lagi</p> -->
                         <hr class="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
                         <div class="flex justify-between">
                             <div class=" bg-white dark:bg-gray-800">
@@ -44,9 +44,9 @@
                                 </div>
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nama
+                                Kata kunci
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <!-- <th scope="col" class="px-6 py-3">
                                 Nama Penerima
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -69,7 +69,7 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
-                            </th>
+                            </th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -79,23 +79,12 @@
                                 {{ $searchhistory->id }}
                             </th>
                             <th scope="row" class="px-6 py-4">
-                                {{ $searchhistory->nama }}
+                                {{ $searchhistory->keyword }}
                             </th>
-                            <td class="px-6 py-4">
-                                {{ $searchhistory->email }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $searchhistory->jenkel }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $searchhistory->tgl_lahir }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $searchhistory->no_hp }}
-                            </td>
+<!--                             
                             <td class="px-6 py-4 text-right">
                                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
+                            </td> -->
                         </tr>
                         @endforeach
                     </tbody>

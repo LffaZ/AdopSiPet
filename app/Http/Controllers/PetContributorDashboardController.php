@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adoption;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +20,7 @@ class PetContributorDashboardController extends Authenticatable
     {
         // Mengakses variabel yang telah diset oleh middleware
         $showInstructionModal = $request->attributes->get('showInstructionModal');
+        $adoptions = Adoption::with('petcontributor:id,nama')->with('user:id,nama')->with('pet:kd,nama')->latest()->paginate(5);
         // dd($showInstructionModal);
 
         $monthAbbreviations = [
@@ -63,6 +65,7 @@ class PetContributorDashboardController extends Authenticatable
         $past90Days = $today->copy()->subDays(90);
         $past90DayRange = $past90Days->format('d M') . ' - ' . $today->format('d M');
 
+        $totalAdopsi = Adoption::sum('total_nominal');
 
 
         return view('petcontributor.dashboard', ['showInstructionModal' => $showInstructionModal, 
@@ -70,6 +73,6 @@ class PetContributorDashboardController extends Authenticatable
                                                 'lastWeekRange' => $lastWeekRange,
                                                 'past30DayRange' => $past30DayRange,
                                                 'lastMonthRange' => $lastMonthRange,
-                                                'past90DayRange' => $past90DayRange]);
+                                                'past90DayRange' => $past90DayRange], compact('totalAdopsi', 'adoptions'));
     }
 }

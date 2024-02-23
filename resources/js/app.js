@@ -18,7 +18,7 @@ Alpine.data('example', () => ({
     },
 }));
 
-const numericInput = document.getElementById("hargapet");
+const numericInput = document.getElementById("harga");
 
 numericInput.addEventListener("input", function (event) {
     // Mendapatkan nilai input tanpa karakter non-numeric dan tanpa leading zero
@@ -34,8 +34,11 @@ numericInput.addEventListener("input", function (event) {
 });
 
 const dropArea = document.getElementById("drop-area");
+const multipleImage = document.querySelectorAll('input[name="images[]"]');
 const inputFile = document.getElementById("input-file");
 const imageView = document.getElementById("img-view");
+const imagePreview = document.getElementById("img-preview");
+const imagePrapreview = document.getElementById("img-prapreview");
 const cropperImage = document.getElementById("cropper-image");
 
 inputFile.addEventListener("change", uploadImage);
@@ -43,14 +46,20 @@ inputFile.addEventListener("change", uploadImage);
 function uploadImage() {
     let imgLink = URL.createObjectURL(inputFile.files[0])
     imageView.style.backgroundImage = `url(${imgLink})`
-    imageView.textContent = ""
-    imageView.style.border = 0
+    // imagePreview.style.backgroundImage = `url(${imgLink})`
+    // imagePrapreview.style.display = 'flex';
+    imageView.textContent = "";
+    imageView.style.border = 0;
     cropperImage.src = imgLink;
     cropperImage.style.display = "block";
-
-    initCropper();
 }
 
+// multipleImage.addEventListener("change", function () {
+//     if (this.files.length > 5) {
+//         alert('Anda hanya dapat mengunggah maksimal 5 gambar.');
+//         this.value = ''; // Bersihkan nilai input jika melebihi batas
+//     }
+// })
 dropArea.addEventListener("dragover", function (e) {
     e.preventDefault()
 })
@@ -60,118 +69,6 @@ dropArea.addEventListener("drop", function (e) {
     uploadImage()
 })
 
-document.getElementById('submit-all-forms').addEventListener('click', function() {
-    // Collect data from all forms
-    var formDataPet = new FormData(document.getElementById('form-pet'));
-    var formDataPetPhoto = new FormData(document.getElementById('form-pet-photo'));
-    var formDataPetDetail = new FormData(document.getElementById('form-pet-detail'));
-    var formDataPetHealth = new FormData(document.getElementById('form-pet-health'));
-
-    // Collect selected values from stts_vaksin checkboxes
-    var checkboxesVaksin = document.querySelectorAll('input[name="stts_vaksin"]:checked');
-    var selectedValuesVaksin = [];
-    checkboxesVaksin.forEach(function(checkbox) {
-        selectedValuesVaksin.push(checkbox.value);
-    });
-    var combinedValuesVaksin = selectedValuesVaksin.join(', ');
-    console.log(combinedValuesVaksin);
-
-    // Collect selected values from riwayat_penyakit checkboxes
-    var checkboxesRiwayat = document.querySelectorAll('input[name="riwayat_penyakit"]:checked');
-    var selectedValuesRiwayat = [];
-    checkboxesRiwayat.forEach(function(checkbox) {
-        selectedValuesRiwayat.push(checkbox.value);
-    });
-    var combinedValuesRiwayat = selectedValuesRiwayat.join(', ');
-
-    // Append selected values to the appropriate form data
-    formDataPet.append('stts_vaksin', combinedValuesVaksin);
-    formDataPetHealth.append('riwayat_penyakit', combinedValuesRiwayat);
-
-    // Merge all form data into one FormData object
-    var formDataCombined = new FormData();
-    formDataCombined.append('petData', formDataPet);
-    formDataCombined.append('petPhotoData', formDataPetPhoto);
-    formDataCombined.append('petDetailData', formDataPetDetail);
-    formDataCombined.append('petHealthData', formDataPetHealth);
-
-    // Send combined form data to server
-    fetch("/petcontributor/pets/store-all", {
-        method: 'POST',
-        body: formDataCombined
-    })
-    .then(response => {
-        // Handle response from server
-    })
-    .catch(error => {
-        // Handle error
-    });
-});
-
-
-// Icons
-const sunIcon = document.querySelector(".sun");
-const moonIcon = document.querySelector(".moon");
-
-// Theme
-let userTheme = localStorage.getItem("theme");
-const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-// Icon Toggling
-const iconToggle = () => {
-    // moonIcon.classList.toggle("display-none");
-    // sunIcon.classList.toggle("display-none");
-    const sunIcon = document.querySelector(".sun");
-    const moonIcon = document.querySelector(".moon");
-
-    if (userTheme === "dark") {
-        moonIcon.style.display = "none";
-        sunIcon.style.display = "block";
-    } else {
-        sunIcon.style.display = "none";
-        moonIcon.style.display = "block";
-    }
-}
-
-// Initial Theme Check
-const themeCheck = () => {
-    if (userTheme === "dark" || (!userTheme && systemTheme)) {
-        document.documentElement.classList.add("dark");
-        // moonIcon.classList.add("display-none");
-        moonIcon.style.display = "none";
-        sunIcon.style.display = "block";
-        return;
-    }
-    // sunIcon.classList.add("display-none");
-    sunIcon.style.display = "none";
-    moonIcon.style.display = "block";
-}
-
-// Manual Theme Switch
-const themeSwitch = () => {
-    if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-        userTheme = "light";
-        iconToggle();
-        return;
-    }
-    document.documentElement.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-    userTheme = "dark";
-    iconToggle();
-}
-
-// call theme switch on clicking buttons
-sunIcon.addEventListener("click", () => {
-    themeSwitch();
-})
-moonIcon.addEventListener("click", () => {
-    themeSwitch();
-})
-
-// invoke theme check on initial load
-themeCheck();
 
 const setup = () => {
     return {

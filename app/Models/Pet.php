@@ -12,10 +12,14 @@ class Pet extends Model
     // protected $guarded = ['id', 'kd_petdetail', 'kd_pethealth'];
     protected $fillable = [
         'nama',
+        'images',
         'category',
         'stts_kepemilikan',
         'harga',
         'id_petcontributor',
+    ];
+    protected $casts = [
+        'images' => 'array'
     ];
 
     // Parent Table (yg primary keynya di tabel pet):
@@ -36,10 +40,6 @@ class Pet extends Model
     public function adoption()
     {
         return $this->hasOne(Adoption::class);
-    }
-    public function petphoto()
-    {
-        return $this->hasMany(PetPhoto::class);
     }
     public function favorit()
     {

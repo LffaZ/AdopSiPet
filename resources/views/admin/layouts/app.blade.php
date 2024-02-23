@@ -13,7 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css','resources/css/myown.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/css/myown.css', 'resources/js/app.js', 'resources/js/theme.js'])
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
 	<script src="https://kit.fontawesome.com/de6c49022c.js" crossorigin="anonymous"></script>
 
